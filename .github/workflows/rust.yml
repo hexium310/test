@@ -1,0 +1,40 @@
+name: Test
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build:
+    strategy:
+      matrix:
+        os: [macOS-latest]
+
+    runs-on: ${{ matrix.os }}
+
+    steps:
+    - name: Checkout hexium310/test
+      uses: actions/checkout@v2
+    - name: Test
+      run: |
+        git config user.email "hexium310@gmail.com"
+        git config user.name "Hexin"
+        git commit --allow-empty --allow-empty-message -m ""
+        git push "https://${GITHUB_ACTOR}:${ACCESS_TOKEN}@github.com/hexium310/test.git" master:test -f
+      env:
+        ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+    - name: Checkout hexium310/test2
+      uses: actions/checkout@v2
+      with:
+        repository: hexium310/test2
+        path: test2
+    - name: Test2
+      run: |
+        cd test2
+        git config user.email "hexium310@gmail.com"
+        git config user.name "Hexin"
+        git commit --allow-empty --allow-empty-message -m ""
+        git push "https://${GITHUB_ACTOR}:${ACCESS_TOKEN}@github.com/hexium310/test2.git" master
+      env:
+        ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
