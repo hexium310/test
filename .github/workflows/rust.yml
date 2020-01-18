@@ -32,8 +32,10 @@ jobs:
         path: test2
     - name: Test2
       run: |
+        ls -l
         cd test2
         pwd
+        ls -l
         echo $ACCESS_TOKEN
         git config user.email "hexium310@gmail.com"
         git config user.name "Hexin"
