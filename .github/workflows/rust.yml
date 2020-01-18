@@ -24,14 +24,14 @@ jobs:
         git push "https://${GITHUB_ACTOR}:${ACCESS_TOKEN}@github.com/hexium310/test.git" master:test -f
       env:
         ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
-    # - name: Checkout hexium310/test2
-    #   uses: actions/checkout@v2
-    #   with:
-    #     repository: hexium310/test2
-    #     path: test2
+    - name: Checkout hexium310/test2
+      uses: actions/checkout@v2
+      with:
+        repository: hexium310/test2
+        token: ${{ secrets.ACCESS_TOKEN }}
+        path: test2
     - name: Test2
       run: |
-        git clone https://github.com/hexium310/test2
         cd test2
         git config user.email "hexium310@gmail.com"
         git config user.name "Hexin"
